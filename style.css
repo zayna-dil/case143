@@ -1,0 +1,108 @@
+/* Customization Variables */
+:root {
+  --image-path-background: url('assets/mainBackground.png');
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--image-path-background) bottom center no-repeat;
+  background-size: 100%;
+}
+
+
+.gallery {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  perspective: 1000px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 110px;
+  padding-right: 110px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 210px;
+  height: 320px;
+  perspective: 1000px;
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0 6px;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1), z-index 0.5s;
+  scroll-snap-align: center;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 210px;
+  height: 320px;
+  text-align: center;
+  transform-origin: center center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg) translateY(250px);
+  transition: 0.4s ease-out;
+}
+
+.flip-card:hover .photo {
+  width: 315px;
+  height: 480px;
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 210px;
+  height: 320px;
+  backface-visibility: hidden;
+}
+
+.flip-card .photo {
+  width: 210px;
+  height: 320px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px #0006;
+}
+
+/* Style the back side */
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card .photo[src*="graceNote.png"]:hover {
+  transform: rotate(-90deg) !important;
+  transition: transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  body {
+    background-size: cover;
+    background-position: bottom center;
+  }
+
+  .container {
+    margin: 1rem;
+  }
+
+  h1 {
+    font-size: calc(var(--font-size-large) - 0.25rem);
+  }
+}
